@@ -74,7 +74,8 @@ var ReactDataGrid = React.createClass({
     onFilter : React.PropTypes.func,
     onCellCopyPaste : React.PropTypes.func,
     onCellsDragged : React.PropTypes.func,
-    onAddFilter : React.PropTypes.func
+    onAddFilter : React.PropTypes.func,
+    onPreKeyDown: React.PropTypes.func
   },
 
   mixins: [

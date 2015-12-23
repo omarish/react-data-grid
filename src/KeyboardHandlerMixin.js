@@ -12,7 +12,11 @@ var KeyboardHandlerMixin = {
 
 
   onKeyDown(e: SyntheticKeyboardEvent){
-    if(this.isCtrlKeyHeldDown(e)){
+    if(this.props.onPreKeyDown) {
+      this.props.onPreKeyDown(e);
+    }
+
+    if(this.isCtrlKeyHeldDown(e) || this.ifCommandKeyHeldDown(e)){
       this.checkAndCall('onPressKeyWithCtrl', e);
     }
     else if (this.isKeyExplicitlyHandled(e.key)) {
@@ -44,6 +48,10 @@ var KeyboardHandlerMixin = {
 
   isCtrlKeyHeldDown(e: SyntheticKeyboardEvent): boolean{
     return e.ctrlKey === true && e.key !== "Control";
+  },
+
+  ifCommandKeyHeldDown(e: SyntheticKeyboardEvent): boolean{
+    return e.metaKey === true && e.key !== 'Meta';
   },
 
   checkAndCall(methodName: string, args: any){
